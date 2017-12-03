@@ -137,6 +137,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+					<!-- Show label Distance for UX-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -180,6 +181,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+					<!-- Show label Distance for UX-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

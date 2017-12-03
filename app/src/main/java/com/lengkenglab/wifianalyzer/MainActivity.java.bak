@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         try {
             closeDrawer();
-			/* Set default UI is Channel Graph  */
 //            NavigationMenu navigationMenu = EnumUtils.find(NavigationMenu.class, menuItem.getItemId(), NavigationMenu.ACCESS_POINTS);
 
             NavigationMenu navigationMenu = EnumUtils.find(NavigationMenu.class, menuItem.getItemId(), NavigationMenu.CHANNEL_GRAPH);

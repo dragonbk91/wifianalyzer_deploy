@@ -118,7 +118,6 @@ public class Settings {
     }
 
     public NavigationMenu getStartMenu() {
-		/* Set default UI is Channel Graph  */
 //        return find(NavigationMenu.class, R.string.start_menu_key, NavigationMenu.ACCESS_POINTS);
         return find(NavigationMenu.class, R.string.start_menu_key, NavigationMenu.CHANNEL_GRAPH);
     }

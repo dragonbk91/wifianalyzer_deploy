@@ -26,12 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum NavigationGroup {
-	/* Reorder Menu. We recommend use Channel Graph for common user
-		1 - Channel Graph
-		2 - Access point
-		3 - Channel ratting
-		4 - Time graph
-    */
     GROUP_FEATURE( NavigationMenu.CHANNEL_GRAPH, NavigationMenu.ACCESS_POINTS, NavigationMenu.CHANNEL_RATING, NavigationMenu.TIME_GRAPH),
 //    GROUP_OTHER(NavigationMenu.EXPORT, NavigationMenu.CHANNEL_AVAILABLE, NavigationMenu.VENDOR_LIST),
 //    GROUP_SETTINGS(NavigationMenu.SETTINGS, NavigationMenu.ABOUT);

@@ -34,12 +34,6 @@ import org.apache.commons.collections4.IterableUtils;
 import java.util.List;
 
 public enum NavigationMenu {
-	/* Reorder Menu. We recommend use Channel Graph for common user
-		1 - Channel Graph
-		2 - Access point
-		3 - Channel ratting
-		4 - Time graph
-    */
     CHANNEL_GRAPH(R.drawable.ic_insert_chart_grey_500_48dp, R.string.action_channel_graph, NavigationItemFactory.CHANNEL_GRAPH, NavigationOptionFactory.OTHER),
     ACCESS_POINTS(R.drawable.ic_network_wifi_grey_500_48dp, R.string.action_access_points, NavigationItemFactory.ACCESS_POINTS, NavigationOptionFactory.AP),
     CHANNEL_RATING(R.drawable.ic_wifi_tethering_grey_500_48dp, R.string.action_channel_rating, NavigationItemFactory.CHANNEL_RATING, NavigationOptionFactory.RATING),
