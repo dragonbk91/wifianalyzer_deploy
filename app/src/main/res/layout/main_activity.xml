@@ -36,16 +36,44 @@
 
         <!--<include layout="@layout/main_connection"/>-->
 
-        <com.google.android.gms.ads.NativeExpressAdView
-            android:id="@+id/adsNative"
+        <!--<com.google.android.gms.ads.NativeExpressAdView-->
+            <!--android:id="@+id/adsNative"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--ads:adSize="360x132"-->
+            <!--ads:adUnitId="ca-app-pub-2507452193287328/2109332524"-->
+            <!--&gt;-->
+        <!--</com.google.android.gms.ads.NativeExpressAdView>-->
+
+        <RelativeLayout
+            android:id="@+id/adsLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_height="150dp"
             android:layout_alignParentBottom="true"
-            ads:adSize="360x132"
-            ads:adUnitId="ca-app-pub-2507452193287328/2109332524"
-            >
-        </com.google.android.gms.ads.NativeExpressAdView>
+            android:layout_centerHorizontal="true">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-2507452193287328/6027718895"></com.google.android.gms.ads.AdView>
+
+            <com.google.android.gms.ads.NativeExpressAdView
+                android:id="@+id/adsNative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                ads:adSize="360x132"
+                ads:adUnitId="ca-app-pub-2507452193287328/2109332524"
+                >
+            </com.google.android.gms.ads.NativeExpressAdView>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/main_fragment_layout"

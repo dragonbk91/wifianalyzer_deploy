@@ -20,7 +20,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<!-- Change filter icon-->
     <item
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_search_black_24dp"

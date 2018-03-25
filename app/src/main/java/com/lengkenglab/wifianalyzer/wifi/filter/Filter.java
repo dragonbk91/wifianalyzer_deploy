@@ -48,7 +48,6 @@ public class Filter {
             .Builder(mainActivity)
             .setView(view)
             .setTitle(R.string.filter_title)
-			/* Change filter icon  */
 //            .setIcon(R.drawable.ic_filter_list_grey_500_48dp)
             .setIcon(R.drawable.ic_search_black_24dp)
             .setNegativeButton(R.string.filter_reset, new Reset())

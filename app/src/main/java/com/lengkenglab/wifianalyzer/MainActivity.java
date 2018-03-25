@@ -30,13 +30,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.lengkenglab.util.EnumUtils;
@@ -57,7 +60,11 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
     private OptionMenu optionMenu;
     private String currentCountryCode;
 
+    public static int cnt_native_fail;
     private static NativeExpressAdView adViewNative;
+    private static AdView adView;
+    private static RelativeLayout adsLayout;
+
     public static final String AD_INTERTITIAL_UNIT_ID = "ca-app-pub-2507452193287328/5189215991";
     public static InterstitialAd interstitial;
     public static int numClick = 0;
@@ -100,8 +107,88 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
         mainContext.getScanner().register(connectionView);
 
         adViewNative = (NativeExpressAdView)findViewById(R.id.adsNative);
-        AdRequest request = new AdRequest.Builder().addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04").build();
-        adViewNative.loadAd(request);
+        adView = (AdView)findViewById(R.id.adView);
+        adsLayout = (RelativeLayout)findViewById(R.id.adsLayout);
+        cnt_native_fail = 0;
+
+        adView.setVisibility(View.GONE);
+        adViewNative.setVisibility(View.GONE);
+        adsLayout.setVisibility(View.GONE);
+
+//        AdRequest request = new AdRequest.Builder().addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04").build();
+//        adViewNative.loadAd(request);
+
+
+        try {
+            AdRequest request = new AdRequest.Builder().addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04").build();
+            adViewNative.loadAd(request);
+            adViewNative.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    adsLayout.setVisibility(View.VISIBLE);
+                    adViewNative.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                    adViewNative.setVisibility(View.GONE);
+                    cnt_native_fail++;
+                    if (cnt_native_fail <= 1) {
+                        AdRequest request = new AdRequest.Builder().addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04").build();
+                        adViewNative.loadAd(request);
+                    } else {
+                        AdRequest adRequest = new AdRequest.Builder().addTestDevice("DEVICE_ID_EMULATOR")
+                                .addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04")
+                                .build();
+                        adView.loadAd(adRequest);
+                        adView.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdLoaded() {
+                                super.onAdLoaded();
+//                                adView.setVisibility(View.VISIBLE);
+                                adsLayout.setVisibility(View.VISIBLE);
+                                adView.setVisibility(View.VISIBLE);
+                            }
+
+                            @Override
+                            public void onAdFailedToLoad(int errorCode) {
+                                super.onAdFailedToLoad(errorCode);
+//                                adView.setVisibility(View.GONE);
+                                AdRequest adRequest = new AdRequest.Builder().addTestDevice("DEVICE_ID_EMULATOR")
+                                        .addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04")
+                                        .build();
+                                adView.loadAd(adRequest);
+                            }
+                        });
+                    }
+                }
+            });
+        } catch (Exception e) {
+
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("DEVICE_ID_EMULATOR")
+                    .addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04")
+                    .build();
+            adView.loadAd(adRequest);
+            adView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+//                                adView.setVisibility(View.VISIBLE);
+                    adsLayout.setVisibility(View.VISIBLE);
+                    adView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAdFailedToLoad(int errorCode) {
+                    super.onAdFailedToLoad(errorCode);
+//                                adView.setVisibility(View.GONE);
+                }
+            });
+        }
+
+
         AdRequest adRequest2 = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("7EAAF3D54270A166B5B8CCE47D3F9E04")
@@ -185,7 +272,6 @@ public class MainActivity extends AppCompatActivity implements OnSharedPreferenc
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         try {
             closeDrawer();
-			/* Set default UI is Channel Graph  */
 //            NavigationMenu navigationMenu = EnumUtils.find(NavigationMenu.class, menuItem.getItemId(), NavigationMenu.ACCESS_POINTS);
 
             NavigationMenu navigationMenu = EnumUtils.find(NavigationMenu.class, menuItem.getItemId(), NavigationMenu.CHANNEL_GRAPH);

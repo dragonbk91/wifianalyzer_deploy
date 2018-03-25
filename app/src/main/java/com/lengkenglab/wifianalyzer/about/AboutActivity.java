@@ -82,7 +82,6 @@ public class AboutActivity extends AppCompatActivity {
             }
         }
         text += " (" + Build.VERSION.RELEASE + "-" + Build.VERSION.SDK_INT + ")";
-// 		Do not show version
 //        setText(R.id.about_version_info, text);
         setText(R.id.about_package_name, BuildConfig.APPLICATION_ID);
     }
